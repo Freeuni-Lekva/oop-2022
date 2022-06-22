@@ -1,27 +1,53 @@
 package client;
 
+import java.awt.*;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.Scanner;
 
 public class Client implements Runnable {
     private Socket s;
-    private Scanner inp;
-    private PrintWriter out;
+    private ObjectInputStream inp;
+    private ObjectOutputStream out;
 
     public Client(int port) throws IOException {
         s = new Socket("127.0.0.1", port);
-        inp = new Scanner(s.getInputStream());
-        out = new PrintWriter(s.getOutputStream());
+        // TODO figure out order
+        out = new ObjectOutputStream(s.getOutputStream());
+        inp = new ObjectInputStream(s.getInputStream());
     }
 
     @Override
     public void run() {
-        out.write("add\n1\n2\n");
-        out.flush();
-        System.out.printf("1 + 2 = %s\n", inp.next());
-        System.out.println("asdasdasd");
+        try {
+            out.writeObject("add");
+            out.flush();
+            out.writeObject(Integer.valueOf(1));
+            out.writeObject(Integer.valueOf(2));
+            out.flush();
+            Integer sum = (Integer) inp.readObject();
+            System.out.println(sum);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        try {
+            out.writeObject("distance");
+            out.flush();
+            out.writeObject(new Point(0, 0));
+            out.writeObject(new Point(10, 10));
+            out.flush();
+            Double dist = (Double) inp.readObject();
+            System.out.println(dist);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
 //        for (int i = 0; i < 100; i++) {
 //            out.write(i);
 //            out.write("\n");

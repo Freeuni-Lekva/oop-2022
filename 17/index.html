@@ -3,44 +3,46 @@
 	<title>Students APP</title>
 	<script type="text/javascript" src="./index.js"></script>
 	<style>
-	 table#students td {
+	 table#students {
 	     width: 100%;
 	     background-color: red;
+	 }
+
+	 /* tr td.first-name { */
+
+	 .first-name {
+	     background-color: blue;
+	     font-style: italic;
+	 }
+
+	 tr td {
+	     background-color: white;
+	     font-style: bold;
+	     font-size: 20px;
 	 }
 	</style>
     </head>
     <body onload="init()">
 	<form action="/create_student" method="POST">
-	    <label for="first_name">First Name</label><input type="text" name="first_name" id="first_name" /><br/>
+	    <label for="first_name" class="first-name">First Name</label><input type="text" name="first_name" id="first_name" /><br/>
 	    <label for="last_name">Last Name</label><input type="text" name="last_name" id="last_name" /><br/>
 	    <label for="admission_year">Admission Year</label><input type="text" name="admission_year" id="admission_year" /><br/>
 	    <input type="submit" value="Create" />
 	</form>
-	<table id="students">
+	<table id="students" class="students-table">
 	    <tr>
-		<th>First Name</th>
 		<th>Last Name</th>
+		<th>First Name</th>
 		<th>Admission Year</th>
 	    </tr>
-	    <tr>
-		<td>Giorgi</td>
-		<td>Bar</td>
-		<td>1000</td>
-	    </tr>
+	    <!-- <tr>
+		 <td>Giorgi</td>
+		 <td>Bar</td>
+		 <td>1000</td>
+		 </tr> -->
 	</table>
 
-	<table id="bla">
-	    <tr>
-		<th>First Name</th>
-		<th>Last Name</th>
-		<th>Admission Year</th>
-	    </tr>
-	    <tr>
-		<td>Dev</td>
-		<td>Null</td>
-		<td>1000</td>
-	    </tr>
+	<table>
 	</table>
-	
     </body>
 </html>

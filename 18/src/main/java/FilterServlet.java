@@ -50,6 +50,7 @@ public class FilterServlet extends HttpServlet {
                 getStudentDao(),
                 buildFilterFromRequest(req));
         req.setAttribute("students", students);
+        req.setAttribute("num_students", students.size() - 1);
         req.getRequestDispatcher("/WEB-INF/filter_view.jsp").forward(req, resp);
     }
 }
